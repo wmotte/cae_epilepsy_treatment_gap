@@ -1,0 +1,33 @@
+Parameter	Value	Basis	Source
+Health states	Untreated, Treated, Controlled, Remission, Death	Structural assumption	Model design
+Cycle length	2 years	Structural assumption	Model design
+Cycles and horizon	5 cycles, 10 years	Structural assumption	Model design
+Index age at entry	30 years	Structural assumption	Adult index cohort, not an age distribution
+Annual discount rate	3.5%	Prespecified range 0-6% in one-way analysis	NICE convention, applied to all three settings for comparability
+Treatment gap at entry, status quo to scenario	LMIC 80% to 20%, HIC 10% to 2.5%	Fixed scenario endpoint, not varied	Scenario definition, not measured national coverage
+Disability weight, untreated severe epilepsy	0.552	Source uncertainty interval 0.375-0.710	Salomon et al., 2015; defined as at least one seizure per month
+Disability weight, untreated less-severe epilepsy	0.263	Source uncertainty interval 0.173-0.367	Salomon et al., 2015; defined as one to eleven seizures per year
+Disability weight, treated with continuing seizures	0.263	Structural assumption, sharing the less-severe draw	Not a source estimate for treated epilepsy with ongoing seizures
+Disability weight, controlled and remission	0.049	Source uncertainty interval 0.031-0.072	Salomon et al., 2015; treated, seizure-free
+Standardised mortality ratio, untreated	6.30	Source 95% confidence interval 2.0-10.0	Carpio et al., 2005; newly diagnosed Ecuador cohort, not an untreated subgroup
+Standardised mortality ratio, treated with continuing seizures	2.54	Source 95% confidence interval 1.84-3.44	Mohanraj et al., 2006; newly diagnosed cohort, no response to treatment
+Standardised mortality ratio, controlled and remission	0.95	Source 95% confidence interval 0.68-1.29	Mohanraj et al., 2006; newly diagnosed cohort, seizure-free on treatment
+Spontaneous remission from untreated	6.9% per cycle (about 30% cumulative over 10 years)	Prespecified range 4.4% to 11.0% per cycle	Nicoletti et al., 2009, converted from a cumulative outcome
+Cumulative seizure control by 10 years, Nigeria and Ecuador	50%	Prespecified range 35% to 70%	Scenario input, converted to 12.9% per 2-year cycle
+Cumulative seizure control by 10 years, UK	70%	Prespecified range 55% to 80%	Scenario input, converted to 21.4% per 2-year cycle
+Composite loss-to-care and recurrence, scenario only	15%	Structural scenario, base case is zero	Mixes recurrence, discontinuation, and loss to care in one route
+Severe share of the epilepsy population	13.7%	Fixed; 9.2%, 19.0%, and 36.3% in scenarios	Sultana et al., 2021, population-based prevalence of drug resistance, used as a proxy for higher disability
+Annual direct health-care cost, Nigeria	US$654.59	Prespecified multiplier 0.75-1.25	Begley et al., 2022, in 2019 US dollars
+Annual direct health-care cost, Ecuador	US$354.20	Prespecified multiplier 0.75-1.25	Begley et al., 2022, lower-middle-income group mean in 2019 US dollars. Ecuador is upper-middle income, whose group mean is US$2 048.20
+Annual direct health-care cost, UK	US$2 320.76	Prespecified multiplier 0.75-1.25	Begley et al., 2022, in 2019 US dollars
+Untreated care cost, share of treated care	10%	Sampled 0% to 30%, stressed to 100% in the one-way analysis	Author assumption. The upper bound is a stress test, not a likely value
+Case-finding and initiation cost, per additional person treated	US$50	Prespecified range US$0 to US$150	Author assumption, covering identification and initiation only
+Prevalence per 1000, Nigeria	9.8 (8.6-11.1)	Source range, not propagated	Watila et al., 2021
+Prevalence per 1000, Ecuador	7.5 (6.0-9.0)	Source range, not propagated	Placencia et al. and the GBD band
+Prevalence per 1000, UK	9.37 (8.85-12.08)	Source range, not propagated	Wigglesworth et al., 2023. The band spans the four UK nations
+National population, Nigeria, Ecuador, UK	240 000 000 / 18 000 000 / 69 000 000	Fixed, not propagated	Approximate 2024 national totals, used only as a scaling input
+GDP per capita, Nigeria, Ecuador, UK	US$2 000 / US$6 500 / US$49 000	Fixed, not varied	World Bank, current US dollars
+Threshold proxy per DALY averted, Nigeria, Ecuador, UK	US$1 000 / US$3 250 / US$24 500	Fixed, not varied	0.5 times GDP per capita, a prespecified proxy and not a country-specific opportunity cost (Woods 2016, Ochalek 2018)
+Background mortality and residual life expectancy	Age-varying	Fixed	UN World Population Prospects 2024, interpolated at cycle midpoints
+Probabilistic distributions	Triangular	See the Basis column for each parameter	Each sampled set is applied to both coverage scenarios
+Probabilistic iterations	1000	Model design	Monte Carlo error is reported in table S9

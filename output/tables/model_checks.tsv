@@ -1,0 +1,17 @@
+check	pass	detail
+Transition matrices are stochastic	TRUE	All entries non-negative and every row sums to 1 within 1e-12
+Initial treatment gap matches occupancy	TRUE	Untreated=gap and Treated=1-gap in every country, severity, and draw
+Death occupancy is monotonic	TRUE	No cohort has a decline in cumulative Death occupancy
+PSA has no clamped boundary masses	TRUE	smr_U, smr_T, smr_SF, spont_rem, dw_sev_UT, dw_less_UT, dw_control, cost_mult, case_find_cost, untreated_cost_frac
+Shared clinical parameters use shared draws	TRUE	One SMR draw for Controlled and Remission; one DW draw for less-severe Untreated and Treated; one DW draw for Controlled and Remission
+Age-varying mortality schedule is ordered	TRUE	Index age 30; rates evaluated at cycle midpoints
+Toy case: inert cohort is stationary	TRUE	Zero mortality, remission, and control leaves x_k = x_0 for every cycle
+Toy case: pure exponential survival	TRUE	Death at 10 y = 1-exp(-0.01 x 10) = 0.095163
+Reward case: within-cycle integration has known area	TRUE	Linear area is 50; Simpson 0-8 plus trapezoid 8-10 gives 334.666667 for t^2
+Reward case: frozen-cohort YLD has closed form	TRUE	10 years x (0.7 x 0.4 + 0.3 x 0.2) = 3.4 YLD
+Reward case: cycle deaths give known YLL	TRUE	Cumulative deaths 0.3 x 20 residual years = 6 YLL at zero discount
+Reward case: care and initiation costs have closed form	TRUE	Care is 10 x 100 x (0.3 + 0.1 x 0.7) = 370; initiation is 30
+Reward case: incremental CEA and INB close exactly	TRUE	Delta DALY=3, delta cost=300, ICER=100, and INB=200 x 3 - 300 = 300
+Disability weights match the declared configuration	TRUE	dw_vec() at point estimates equals CFG$dw for both severity cohorts
+DW-RETAIN structural scenario is well formed	TRUE	Treated inherits the entry weight; Controlled and Remission are unchanged
+YLL annuity bounds the life-table survival integral	TRUE	a(e_x) >= integral exp(-ru)S(u)du at every cycle midpoint age (Jensen)

@@ -1,0 +1,13 @@
+Data, results tables and figures
+
+The files in data/derived/, output/tables/, output/figures/ and
+output/diagnostics/ are licensed under the Creative Commons Attribution 4.0
+International licence (CC BY 4.0). You may share and adapt them for any purpose,
+provided you give appropriate credit by citing the paper or this repository.
+
+Full licence text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+The life-table extract in data/raw/ and the tables derived from it come from
+United Nations, Department of Economic and Social Affairs, Population Division.
+World Population Prospects 2024. They are used under the Creative Commons
+Attribution 3.0 IGO licence (https://creativecommons.org/licenses/by/3.0/igo/).

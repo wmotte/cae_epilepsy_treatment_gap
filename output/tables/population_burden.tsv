@@ -1,0 +1,37 @@
+country	setting	severity	gap	pwe_total	pwe	pop_daly_averted	pop_incr_cost	icer	verdict	verdict_oc
+Ecuador	LMIC	less_severe	0.2	135000	116505	84157.14084821803	187425152.13328683	2227.0855478719063	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Ecuador	LMIC	less_severe	0.30000000000000004	135000	116505	70130.95070684838	156187626.777739	2227.085547871905	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Ecuador	LMIC	less_severe	0.4	135000	116505	56104.76056547871	124950101.42219122	2227.085547871905	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Ecuador	LMIC	less_severe	0.5	135000	116505	42078.570424109035	93712576.06664342	2227.085547871905	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Ecuador	LMIC	less_severe	0.6000000000000001	135000	116505	28052.380282739345	62475050.71109558	2227.0855478719054	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Ecuador	LMIC	less_severe	0.7	135000	116505	14026.190141369687	31237525.355547823	2227.085547871905	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Ecuador	LMIC	less_severe	0.8	135000	116505	0	0	NA	n/a (base case)	n/a (base case)
+Ecuador	LMIC	severe	0.2	135000	18495	34127.73603610215	29753471.427879833	871.8266982727778	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Ecuador	LMIC	severe	0.30000000000000004	135000	18495	28439.780030085123	24794559.52323319	871.8266982727775	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Ecuador	LMIC	severe	0.4	135000	18495	22751.8240240681	19835647.618586555	871.8266982727777	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Ecuador	LMIC	severe	0.5	135000	18495	17063.86801805108	14876735.713939916	871.8266982727775	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Ecuador	LMIC	severe	0.6000000000000001	135000	18495	11375.912012034049	9917823.809293274	871.8266982727774	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Ecuador	LMIC	severe	0.7	135000	18495	5687.956006017031	4958911.904646642	871.8266982727774	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Ecuador	LMIC	severe	0.8	135000	18495	0	0	NA	n/a (base case)	n/a (base case)
+Nigeria	LMIC	less_severe	0.2	2352000	2029776	3816408.796124361	5644875507.6704445	1479.106618086335	highly cost-effective (<1x GDP)	above opportunity-cost threshold
+Nigeria	LMIC	less_severe	0.30000000000000004	2352000	2029776	3180340.663436968	4704062923.058703	1479.1066180863347	highly cost-effective (<1x GDP)	above opportunity-cost threshold
+Nigeria	LMIC	less_severe	0.4	2352000	2029776	2544272.5307495743	3763250338.4469624	1479.1066180863345	highly cost-effective (<1x GDP)	above opportunity-cost threshold
+Nigeria	LMIC	less_severe	0.5	2352000	2029776	1908204.3980621814	2822437753.8352222	1479.1066180863343	highly cost-effective (<1x GDP)	above opportunity-cost threshold
+Nigeria	LMIC	less_severe	0.6000000000000001	2352000	2029776	1272136.2653747867	1881625169.2234807	1479.1066180863345	highly cost-effective (<1x GDP)	above opportunity-cost threshold
+Nigeria	LMIC	less_severe	0.7	2352000	2029776	636068.132687394	940812584.6117415	1479.106618086335	highly cost-effective (<1x GDP)	above opportunity-cost threshold
+Nigeria	LMIC	less_severe	0.8	2352000	2029776	0	0	NA	n/a (base case)	n/a (base case)
+Nigeria	LMIC	severe	0.2	2352000	322224	916981.1272539869	896115810.6035353	977.2456422162849	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Nigeria	LMIC	severe	0.30000000000000004	2352000	322224	764150.9393783225	746763175.5029459	977.2456422162846	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Nigeria	LMIC	severe	0.4	2352000	322224	611320.751502658	597410540.4023567	977.2456422162845	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Nigeria	LMIC	severe	0.5	2352000	322224	458490.5636269935	448057905.30176765	977.2456422162848	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Nigeria	LMIC	severe	0.6000000000000001	2352000	322224	305660.375751329	298705270.2011783	977.2456422162844	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Nigeria	LMIC	severe	0.7	2352000	322224	152830.18787566465	149352635.10058933	977.2456422162845	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+Nigeria	LMIC	severe	0.8	2352000	322224	0	0	NA	n/a (base case)	n/a (base case)
+UK	HIC	less_severe	0.025	646530	557955.39	43164.29964233049	725722300.9562637	16813.021570366458	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+UK	HIC	less_severe	0.05	646530	557955.39	28776.199761553693	483814867.30417544	16813.021570366425	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+UK	HIC	less_severe	0.07500000000000001	646530	557955.39	14388.099880776781	241907433.65208825	16813.02157036654	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+UK	HIC	less_severe	0.1	646530	557955.39	0	0	NA	n/a (base case)	n/a (base case)
+UK	HIC	severe	0.025	646530	88574.61	19555.837346509776	115207364.11472552	5891.200774140572	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+UK	HIC	severe	0.05	646530	88574.61	13037.224897673197	76804909.40981695	5891.200774140563	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+UK	HIC	severe	0.07500000000000001	646530	88574.61	6518.612448836583	38402454.704908565	5891.20077414059	highly cost-effective (<1x GDP)	cost-effective (<opportunity-cost threshold)
+UK	HIC	severe	0.1	646530	88574.61	0	0	NA	n/a (base case)	n/a (base case)

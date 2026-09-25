@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this code or its results, please cite the paper. Until it is published, cite this repository."
+title: "Health benefits and costs of reducing the epilepsy treatment gap in Nigeria, Ecuador, and the UK: code and data"
+type: software
+license: MIT
+version: "1.0.0"
+date-released: "2026-09-25"
+authors:
+  - family-names: Otte
+    given-names: Willem M
+    affiliation: "University Medical Center Utrecht"
+    email: w.m.otte@umcutrecht.nl
+  - family-names: Keezer
+    given-names: Mark R
+  - family-names: Sander
+    given-names: Josemir W
+  - family-names: Singh
+    given-names: Gagandeep
+preferred-citation:
+  type: article
+  title: "Health benefits and costs of reducing the epilepsy treatment gap in Nigeria, Ecuador, and the UK: a Markov modelling study"
+  authors:
+    - family-names: Otte
+      given-names: Willem M
+    - family-names: Keezer
+      given-names: Mark R
+    - family-names: Sander
+      given-names: Josemir W
+    - family-names: Singh
+      given-names: Gagandeep
+  journal: "The Lancet Neurology"
+  year: 2026
+  notes: "Submitted"

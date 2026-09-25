@@ -1,0 +1,4 @@
+country	iso3	setting	prevalence_per_1000	prev_lo	prev_hi	population	gdp_pc	cost_annual	bg_rate
+Nigeria	NGA	LMIC	9.8	8.6	11.1	240000000	2000	654.59	0.007352658
+Ecuador	ECU	LMIC	7.5	6	9	18000000	6500	354.2	0.0016232759999999999
+UK	GBR	HIC	9.37	8.85	12.08	69000000	49000	2320.76	7.65744e-4
