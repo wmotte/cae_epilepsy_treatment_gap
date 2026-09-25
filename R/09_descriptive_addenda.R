@@ -1,20 +1,19 @@
 # ==============================================================================
-# 09_gs_addenda.R
+# 09_descriptive_addenda.R
 #
 # Willem M. (Wim) Otte, w.m.otte@umcutrecht.nl
 #
-# Addenda requested in Gagandeep Singh's 21-Jun-2026 review round. Reads existing
-# model outputs only (no re-simulation) and emits new tables/figures:
+# Descriptive addenda: population burden, state occupancy, cohort sizes and
+# CE-plane quadrants. Reads existing model outputs only (no re-simulation) and emits new tables/figures:
 #
 #   population_daly_reduction.tsv : baseline vs bridged TOTAL epilepsy DALYs and
-#                                   % reduction per country (Singh C502, C315).
-#                                   Model-internal 10-year-horizon totals; the
-#                                   GBD-2021 annual denominator is a separate,
-#                                   still-to-be-reconciled framing (see memo).
+#                                   % reduction per country. Model-internal
+#                                   10-year-horizon totals, not GBD-2021 annual
+#                                   totals.
 #   state_occupancy_snapshots.tsv : mean state occupancy per cycle, status-quo vs
-#                                   bridged, all countries/cohorts (C513, C596, C901).
+#                                   bridged, all countries/cohorts.
 #   figS4_combined_dalys.png      : combined (severe+less-severe) DALYs averted
-#                                   per person across the gap sweep, by country (C315).
+#                                   per person across the gap sweep, by country.
 #   figS5_cohort_ecuador.png       : Ecuador state occupancy, both strata.
 #   figS6_cohort_uk.png            : UK state occupancy, both strata.
 # ==============================================================================
@@ -38,7 +37,7 @@ base_gap_of <- function(setting) CFG$gap_base[[setting]]
 itv_gap_of  <- function(setting) CFG$gap_intervention[[setting]]
 sev_w <- tibble(severity = names(CFG$severity_frac), w = as.numeric(CFG$severity_frac))
 
-# ---- (1) Population DALY reduction: baseline vs bridged (C502, C315) ----------
+# ---- (1) Population DALY reduction: baseline vs bridged ----------------------
 # Each cohort's per-person 10y DALYs at the status-quo gap and at the bridged gap,
 # scaled by its severity-specific slice of the national PWE population, summed.
 pp <- per_person %>%
@@ -66,7 +65,7 @@ write_tsv(reduction, file.path(CFG$dir_tab, "population_daly_reduction.tsv"))
 legacy_gbd <- file.path(CFG$dir_tab, "gbd_denominator_reconciliation.tsv")
 if (file.exists(legacy_gbd)) unlink(legacy_gbd)
 
-# ---- (2) State-occupancy snapshots (C513, C596, C901) ------------------------
+# ---- (2) State-occupancy snapshots ------------------------------------------
 snap <- sim$traces %>%
   filter((setting == "LMIC" & gap %in% c(CFG$gap_base$LMIC, CFG$gap_intervention$LMIC)) |
          (setting == "HIC"  & gap %in% c(CFG$gap_base$HIC,  CFG$gap_intervention$HIC))) %>%
@@ -104,7 +103,7 @@ figS4 <- ggplot(comb, aes(gap, daly_averted_pp, colour = country)) +
   theme_cae(base_size = 12)
 save_fig(figS4, "figS4_combined_dalys", width = 8.5, height = 5.2)
 
-# ---- (4) Cohort evolution for Ecuador and the UK (Singh follow-up) ------------
+# ---- (4) Cohort evolution for Ecuador and the UK ----------------------------
 # State occupancy is severity-independent because severity changes disability
 # weights only, not transitions or mortality. Main figure 1 therefore already
 # represents both Nigerian strata, and one panel pair per remaining country is
@@ -133,7 +132,7 @@ cohort_fig <- function(cty) {
 save_fig(cohort_fig("Ecuador"), "figS5_cohort_ecuador", width = 9, height = 4.8)
 save_fig(cohort_fig("UK"), "figS6_cohort_uk", width = 9, height = 4.8)
 
-# ---- (5) National cohort sizes in absolute numbers (Singh follow-up) ----------
+# ---- (5) National cohort sizes in absolute numbers --------------------------
 # Report the modelled cohort as counts, not only percentages: national people
 # with epilepsy split into the severe (13.7%) and less-severe (86.3%) strata.
 cohort_sizes <- prev %>%
@@ -145,7 +144,7 @@ cohort_sizes <- prev %>%
   mutate(across(c(pwe_total, n_severe, n_less_severe), round))
 write_tsv(cohort_sizes, file.path(CFG$dir_tab, "cohort_sizes.tsv"))
 
-# ---- (6) Cost-effectiveness-plane quadrant distribution (Singh follow-up) -----
+# ---- (6) Cost-effectiveness-plane quadrant distribution --------------------
 # Classify each of the 1000 PSA draws (severe cohort, fully bridged gap) by the
 # sign of incremental cost and averted DALYs. The dominant/cost-saving quadrant
 # (lower cost AND more health) answers "is bridging ever cost-saving?".

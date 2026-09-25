@@ -109,7 +109,7 @@ cea_summary <- cea %>%
     da_lo = quantile(daly_averted, .025), da_hi = quantile(daly_averted, .975),
     ic_lo = quantile(incr_cost, .025),    ic_hi = quantile(incr_cost, .975),
     icer  = mean(incr_cost) / mean(daly_averted),
-    # V2: incremental net monetary benefit (INB) with CI - the recommended
+    # Incremental net monetary benefit (INB) with CI - the recommended
     # summary when the averted-DALY denominator can cross zero (an ICER point
     # estimate is then uninterpretable). INB = lambda * dDALY - dCost; >0 means
     # cost-effective at willingness-to-pay lambda. Reported at the
@@ -134,7 +134,7 @@ cea_summary <- cea %>%
       icer < 3 * gdp_pc       ~ "cost-effective (<3x GDP)",
       TRUE                    ~ "not cost-effective (>3x GDP)"
     ),
-    # V2: stricter opportunity-cost verdict (0.5x GDP proxy).
+    # Stricter opportunity-cost verdict (0.5x GDP proxy).
     verdict_oc = case_when(
       !is.finite(icer)  ~ "n/a (base case)",
       icer < 0          ~ "dominant (cost-saving)",
@@ -144,7 +144,7 @@ cea_summary <- cea %>%
   )
 write_tsv(cea_summary, file.path(CFG$dir_tab, "cea_results.tsv"))
 
-# ---- Per-draw bridged CEA (for CE-plane quadrant table, Singh follow-up) ------
+# ---- Per-draw bridged CEA (for the CE-plane quadrant table) -----------------
 # Persist the per-iteration incremental cost and averted DALYs at the fully
 # bridged gap, so the 1000-draw cloud can be classified into cost-effectiveness
 # plane quadrants (dominant / cost-saving = incr_cost<0 & daly_averted>0).
@@ -154,9 +154,9 @@ psa_bridged <- cea %>%
 write_tsv(psa_bridged, file.path(CFG$dir_tab, "psa_draws_bridged.tsv"))
 
 # ---- Population-level burden averted -----------------------------------------
-# V2 FIX: scale each severity cohort by its SEVERITY-SPECIFIC share of PWE, not
-# by the total PWE. Previously the severe per-person figure was multiplied by the
-# entire PWE population, overstating the severe national burden ~2.8x.
+# Scale each severity cohort by its SEVERITY-SPECIFIC share of PWE, not by the
+# total PWE. Multiplying the severe per-person figure by the entire PWE
+# population would overstate the severe national burden.
 sev_w <- tibble(severity = names(CFG$severity_frac),
                 w = as.numeric(CFG$severity_frac))
 pop_burden <- cea_summary %>%

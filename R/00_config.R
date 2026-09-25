@@ -50,12 +50,12 @@ for (d in c(CFG$dir_derived, CFG$dir_fig, CFG$dir_diag, CFG$dir_tab)) {
 
 # ---- Reproducibility ---------------------------------------------------------
 CFG$seed   <- 20260520L
-CFG$n_psa  <- 1000L         # Monte Carlo PSA iterations (V2: 100 -> 1000; the
-                            # tail-probability claims need a stable MC estimate,
-                            # MC SE on a 0.9 proportion at n=100 is ~3%)
+CFG$n_psa  <- 1000L         # Monte Carlo PSA iterations. Tail-probability claims
+                            # need a stable MC estimate (MC SE on a 0.9
+                            # proportion is ~3% at n=100, ~1% at n=1000)
 
 # ---- Time horizon ------------------------------------------------------------
-CFG$cycle_years <- 2L       # cycle length (Singh comment #4: stated explicitly)
+CFG$cycle_years <- 2L       # cycle length
 CFG$n_cycles    <- 5L       # 5 cycles
 CFG$horizon_y   <- CFG$cycle_years * CFG$n_cycles   # 10-year horizon
 CFG$discount    <- 0.035    # annual discount rate (3.5%)
@@ -64,7 +64,7 @@ CFG$index_age   <- 30       # explicit starting age of the representative cohort
 # ---- Health states (fixed order) ---------------------------------------------
 # 1 Untreated  : symptomatic, no/insufficient ASM (the treatment gap)
 # 2 Treated    : on ASM, still seizing
-# 3 Controlled : on ASM, seizure-free  (Singh comments #2,#5 -> new state)
+# 3 Controlled : on ASM, seizure-free
 # 4 Remission  : spontaneous, off ASM, seizure-free
 # 5 Death      : absorbing
 CFG$states <- c("Untreated", "Treated", "Controlled", "Remission", "Death")
@@ -82,11 +82,10 @@ CFG$dw <- list(
 )
 # Severity split of the epilepsy population. Drug resistance is used as a PROXY
 # for the higher-seizure-frequency / higher-disability cohort; the two constructs
-# are related but not identical (see manuscript Limitations). V7 (co-author
-# feedback, September 2026): base case is the population/community-based DRE
-# prevalence of Sultana et al. 2021, 13.7% (95% CI 9.2-19.0). The clinic-based
-# value of 36.3% (30.4-42.4), close to the former 36% (Kwan & Brodie 2000), and
-# the population CI bounds are scenarios in 11_coauthor_sensitivity.R. Used to
+# are related but not identical (see manuscript Limitations). The base case is the population/community-based
+# DRE prevalence of Sultana et al. 2021, 13.7% (95% CI 9.2-19.0). The clinic-based
+# value of 36.3% (30.4-42.4) and the population CI bounds are scenarios in
+# 11_additional_sensitivity.R. Used to
 # weight severe and less-severe cohorts into a combined population-level burden.
 CFG$severity_frac <- c(severe = 0.137, less_severe = 0.863)
 
@@ -113,8 +112,7 @@ dw_bounds <- function(param) {
 }
 
 # ---- Standardized mortality ratios ----------------
-# 2026-09 co-author revision (Singh 1 Sep, Otte 16 Sep, Keezer 16 Sep, Sander
-# 16 Sep 2026). The treated and seizure-free SMRs now come from ONE source,
+# The treated and seizure-free SMRs come from ONE source,
 # Mohanraj et al. 2006 (PMID 16713919), stratified by response in its newly
 # diagnosed cohort:
 #   Treated    2.54  (95% CI 1.84-3.44)  on ASM, did not respond (42 deaths,
@@ -131,13 +129,9 @@ dw_bounds <- function(param) {
 #                  diagnosed cohort and reported an overall SMR of 6.3 (95% CI
 #                  2.0-10.0). It did not define an untreated subgroup. Assignment
 #                  of that estimate to Untreated is a structural model mapping.
-#                  Retained in the base case by author decision (25 Sep 2026).
 #                  Alternatives (Ngugi 2014 6.5, Levira 2017 median 2.6, equal
 #                  to Treated, best and worst case) are run in
-#                  11_coauthor_sensitivity.R.
-#
-# Superseded: Treated and Controlled 2.4 (Callaghan 2014, drug-resistant cohort
-# with >=1 seizure/month) and Remission 1.42 (Mohanraj whole cohort).
+#                  11_additional_sensitivity.R.
 CFG$smr <- list(
   Untreated  = 6.3,
   Treated    = 2.54,
@@ -155,12 +149,10 @@ CFG$smr_sens <- list(
 
 # ---- Transition parameters ---------------------------------------------------
 # Spontaneous remission from Untreated.
-# V2 FIX: Nicoletti 2009 reports ~30-44% *cumulative* 5-year remission over a
-# ~10-year follow-up in untreated rural Bolivia. The earlier model applied 0.30
-# as a PER-2-YEAR-CYCLE probability, which compounds to ~83% spontaneous
-# remission over the horizon - implausible, and it inflated the low-mortality
-# Remission inflow in the status-quo arm. We now treat ~30% as a cumulative
-# 10-year figure and convert to a per-cycle probability:
+# Nicoletti 2009 reports ~30-44% *cumulative* 5-year remission over a ~10-year
+# follow-up in untreated rural Bolivia. Applying 0.30 per 2-year cycle would
+# compound to ~83% spontaneous remission over the horizon, which is implausible.
+# We therefore treat ~30% as a cumulative 10-year figure and convert to a per-cycle probability:
 #   annual rate r = -log(1 - 0.30)/10 = 0.0357; p(2y) = 1 - exp(-2r) = 0.069.
 CFG$spont_remission_prob <- 0.069  # Untreated -> Remission share (per 2y cycle)
 # Sensitivity range from the 20%-44% cumulative-10y span -> per-cycle 0.044-0.110.
@@ -174,10 +166,10 @@ CFG$control_cum_sens <- list(LMIC = c(0.35, 0.70), HIC = c(0.55, 0.80))
 CFG$control_prob <- map(CFG$control_cum_10y,
   ~ 1 - (1 - .x)^(1 / CFG$n_cycles))
 
-# V2: optional relapse (secondary treatment gap). Base case = 0 (no relapse, as
-# before), but a scenario analysis (07) sets a per-cycle probability of moving
+# Optional relapse (secondary treatment gap). Base case = 0 (no relapse). A
+# scenario analysis (07) sets a per-cycle probability of moving
 # Treated/Controlled/Remission back to Untreated, to bound the optimism of the
-# no-relapse structure flagged in review.
+# no-relapse structure.
 CFG$relapse_base     <- 0.00
 CFG$relapse_scenario <- 0.15   # per-2y-cycle relapse to Untreated (scenario)
 
@@ -196,7 +188,7 @@ CFG$population <- c(
   Ecuador = 18e6,    # ~2024
   UK      = 69e6     # ~2024
 )
-CFG$population_ssa <- 1.273663761e9   # Sub-Saharan Africa (burden framing, #7)
+CFG$population_ssa <- 1.273663761e9   # Sub-Saharan Africa (burden framing)
 
 # WPP reference year for background mortality.
 CFG$wpp_year <- 2023L
@@ -217,7 +209,7 @@ CFG$wpp_year <- 2023L
 # The base case therefore understates Ecuadorian cost by roughly 5.8x, which
 # biases the Ecuadorian ICER favourably; the +/-25% PSA multiplier cannot span
 # that gap. Structural scenario ECU-UMIC in 10_structural_scenarios.R re-runs
-# Ecuador at US$2048.20. Changing the base case is an author decision.
+# Ecuador at US$2048.20.
 CFG$cost_annual <- c(
   Nigeria = 654.59,   # Begley 2022, country estimate (2019 USD)
   Ecuador = 354.20,   # Begley 2022, lower-middle-income group mean (2019 USD)
@@ -250,7 +242,7 @@ CFG$cost_case_finding_sens <- c(0, 150)
 
 # ---- Cost-effectiveness thresholds (GDP per capita, USD) ---------------------
 # 1x and 3x GDP per capita (WHO-CHOICE convention; see table_parameters.tsv).
-# NB (V2): the 1x/3x-GDP thresholds are widely criticised as too permissive
+# NB: the 1x/3x-GDP thresholds are widely criticised as too permissive
 # (Bertram et al., 2016) and have been effectively retired by WHO. We retain
 # them for comparability but ALSO report an opportunity-cost-based threshold.
 CFG$gdp_pc <- c(
@@ -274,11 +266,9 @@ CFG$gap_sweep <- list(
   HIC  = seq(0.025, 0.10, by = 0.025)   # 2.5-10% residual gap (4 levels)
 )
 # Base-case representative gaps for headline numbers.
-# 2026-09 co-author revision: the UK status quo was 30%, which Singh flagged as
-# implausible for a high-income setting with a national health service. It is
-# now 10%, the upper bound for high-income countries in Meyer 2010, reduced by
-# the same 75% relative reduction as the LMIC scenario (80% -> 20%). The former
-# 30% -> 10% and a 5% -> 1.25% scenario are run in 11_coauthor_sensitivity.R.
+# The UK status quo is 10%, the upper bound for high-income countries in Meyer 2010, reduced by
+# the same 75% relative reduction as the LMIC scenario (80% -> 20%). A wider
+# 30% -> 10% and a 5% -> 1.25% scenario are run in 11_additional_sensitivity.R.
 CFG$gap_base <- list(LMIC = 0.80, HIC = 0.10)   # status-quo gap
 CFG$gap_intervention <- list(LMIC = 0.20, HIC = 0.025)  # reduced gap
 

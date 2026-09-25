@@ -33,7 +33,7 @@ build_transition_matrix <- function(p) {
   s  <- CFG$states
   M  <- matrix(0, length(s), length(s), dimnames = list(s, s))
   pd <- function(state) rate_to_prob(p$bg_rate * p$smr[[state]], CFG$cycle_years)
-  # V2: optional per-cycle relapse to Untreated (secondary treatment gap).
+  # Optional per-cycle relapse to Untreated (secondary treatment gap).
   # Defaults to 0 so the base case is unchanged from the no-relapse structure.
   relapse <- if (is.null(p$relapse)) 0 else p$relapse
 

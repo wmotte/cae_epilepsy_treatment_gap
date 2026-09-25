@@ -1,57 +1,56 @@
 # ==============================================================================
-# 11_coauthor_sensitivity.R
+# 11_additional_sensitivity.R
 #
 # Willem M. (Wim) Otte, w.m.otte@umcutrecht.nl
 #
-# Sensitivity analyses added during the co-author revision of September 2026.
-# Results appear in appendix tables S10-S16.
+# Additional sensitivity analyses for inputs whose evidence is weak or contested.
+# Results appear in appendix tables S12-S16.
 #
 # Every scenario re-uses the same 1000 paired draws as the base case, so each
 # row is directly comparable to the headline. A scenario that changes one
 # distribution re-maps the existing draw to the new distribution at the same
 # quantile (remap_tri), keeping its pairing with every other parameter.
 #
-#   Mortality in untreated epilepsy (Singh, Keezer, Sander)
+#   Mortality in untreated epilepsy
 #     SMR-U-NGUGI   Ngugi 2014, Kilifi, SMR 6.5 (95% CI 5.0-8.3). Whole active
 #                   convulsive epilepsy cohort, about half non-adherent.
 #     SMR-U-LEVIRA  Levira 2017, weighted median SMR 2.6 of the higher-quality
 #                   LMIC population-based studies. Fixed value.
 #     SMR-U-EQ-T    Untreated equal to treated with continuing seizures (2.54,
-#                   shared draw). Keezer: the untreated SMR is probably not far
-#                   from that of uncontrolled seizures. Mortality then falls
+#                   shared draw). The untreated SMR is probably not far from
+#                   that of uncontrolled seizures. Mortality then falls
 #                   only when seizures stop.
 #     SMR-BEST      Source 95% CI bounds most favourable to treatment:
 #                   untreated 10.0, treated 1.84, seizure-free 0.68.
 #     SMR-WORST     Least favourable, with treated capped at untreated so that
 #                   medication never raises mortality: untreated 2.0, treated
 #                   2.0, seizure-free 1.29.
-#     SMR-U-DECLINE Keezer: SMRs fall with follow-up, so a 3-year SMR overstates
+#     SMR-U-DECLINE SMRs fall with follow-up, so a 3-year SMR overstates
 #                   excess mortality over 10 years. The untreated SMR falls
 #                   linearly from its sampled value at entry to 2.6 (Levira
 #                   median) at year 10, evaluated at each cycle midpoint.
-#   Untreated SMR grid (Otte, V7): the untreated SMR fixed at values from 2.0 to
+#   Untreated SMR grid: the untreated SMR fixed at values from 2.0 to
 #     10.0, all other inputs at their paired draws, and the break-even SMR at
 #     which the mean ICER equals 0.5 x GDP and at which half of the draws are
 #     cost-effective. Written to sensitivity_smr_grid.tsv / smr_breakeven.tsv.
-#   UK treatment gap (Singh, Otte)
-#     UK-GAP-30     Former base case, 30% -> 10%, read as a broad management gap.
+#   UK treatment gap
+#     UK-GAP-30     Wider gap, 30% -> 10%, read as a broad management gap.
 #     UK-GAP-5      5% -> 1.25%, mid-range of European estimates.
-#   Drug resistance (Keezer; Sultana 2021)
+#   Drug resistance (Sultana 2021)
 #     DRE-9, DRE-19 Severe (drug-resistant) share at the bounds of the
 #                   population-based 95% CI (9.2%, 19.0%) instead of 13.7%.
-#     DRE-36        Clinic-based prevalence 36.3%, close to the former 36%.
+#     DRE-36        Clinic-based prevalence 36.3%.
 #                   All three change the mixed population only.
 #     UK-CTRL-85    UK cumulative seizure control 85% (80-90%) instead of 70%.
-#   Costs (Keezer)
+#   Costs
 #     UK-INIT-500   UK case-finding and initiation US$500 (250-750) per person.
 #
-# A 10 000-draw re-run of the headline answers the question why 1000 draws
-# were used (Singh comment on the probabilistic analysis).
+# A 10 000-draw re-run of the headline checks that 1000 draws are enough.
 #
 # THIS SCRIPT CHANGES NOTHING IN THE BASE CASE.
 #
 # Outputs (output/tables/):
-#   sensitivity_coauthor.tsv   scenario x country x cohort, with ICER 95% UIs
+#   sensitivity_additional.tsv scenario x country x cohort, with ICER 95% UIs
 #   sensitivity_smr_grid.tsv   untreated SMR grid x country x cohort
 #   smr_breakeven.tsv          break-even untreated SMR per country x cohort
 #   mc_10000.tsv               headline probabilities at 1000 and 10 000 draws
@@ -130,7 +129,7 @@ SCENARIOS <- list(
        }),
 
   list(id = "UK-GAP-30", group = "UK treatment gap", countries = "UK",
-       label = "UK gap 30% to 10% (former base case)",
+       label = "UK gap 30% to 10% (wider gap)",
        f = function(row, ctry) list(g0 = 0.30, g1 = 0.10)),
   list(id = "UK-GAP-5", group = "UK treatment gap", countries = "UK",
        label = "UK gap 5% to 1.25%",
@@ -229,12 +228,12 @@ run_country <- function(sc, ctry, draws) {
 }
 
 results <- map_dfr(SCENARIOS, function(sc) {
-  message("[11_coauthor] ", sc$id)
+  message("[11_additional] ", sc$id)
   ctries <- sc$countries %||% CFG$countries$country
   map_dfr(ctries, ~ run_country(sc, .x, draws)) %>%
     mutate(scenario_id = sc$id, group = sc$group, label = sc$label, .before = 1)
 })
-write_tsv(results, file.path(CFG$dir_tab, "sensitivity_coauthor.tsv"))
+write_tsv(results, file.path(CFG$dir_tab, "sensitivity_additional.tsv"))
 
 # ---- Untreated SMR grid and break-even value ---------------------------------
 # The untreated SMR is fixed at each grid value in every draw, so the grid shows
@@ -243,7 +242,7 @@ write_tsv(results, file.path(CFG$dir_tab, "sensitivity_coauthor.tsv"))
 SMR_GRID <- c(2.0, 2.54, 3.0, 3.5, 4.0, 4.5, 5.0, 6.3, 8.0, 10.0)
 grid_sc <- function(v) list(id = "SMR-GRID", f = function(row, ctry) list(smr_U = v))
 smr_grid <- map_dfr(SMR_GRID, function(v) {
-  message("[11_coauthor] SMR grid ", v)
+  message("[11_additional] SMR grid ", v)
   map_dfr(CFG$countries$country, ~ run_country(grid_sc(v), .x, draws)) %>%
     mutate(smr_U = v, .before = 1)
 })
@@ -305,15 +304,15 @@ mc <- map_dfr(CFG$countries$country, function(ctry) {
 write_tsv(mc, file.path(CFG$dir_tab, "mc_10000.tsv"))
 
 # ---- Console summary ---------------------------------------------------------
-message("\n[11_coauthor] Probability cost-effective at 0.5x GDP (severe | mixed)")
+message("\n[11_additional] Probability cost-effective at 0.5x GDP (severe | mixed)")
 print(results %>%
   filter(severity %in% c("severe", "mixed")) %>%
   transmute(scenario_id, country, severity, da = round(daly_averted, 2),
             icer = round(icer), p = sprintf("%.1f%%", 100 * p_ce_oc)) %>%
   pivot_wider(names_from = severity, values_from = c(da, icer, p)), n = 60)
-message("\n[11_coauthor] Monte Carlo stability")
+message("\n[11_additional] Monte Carlo stability")
 print(mc %>% mutate(across(c(p_ce_oc, mc_lo, mc_hi), ~ sprintf("%.1f%%", 100 * .x))))
-message("\n[11_coauthor] Break-even untreated SMR")
+message("\n[11_additional] Break-even untreated SMR")
 print(breakeven)
-message("[11_coauthor] wrote sensitivity_coauthor.tsv, sensitivity_smr_grid.tsv, ",
+message("[11_additional] wrote sensitivity_additional.tsv, sensitivity_smr_grid.tsv, ",
         "smr_breakeven.tsv, mc_10000.tsv")

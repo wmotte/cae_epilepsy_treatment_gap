@@ -135,9 +135,9 @@ renv.lock          exact R package versions
 | `06_model_checks.R` | Sixteen automatic checks on the model's structure, sampling and traces |
 | `07_sensitivity.R` | One-way (tornado) analysis, seizure-control threshold, relapse scenario and acceptability curves |
 | `08_markov_diagram.R` | State diagram and transition matrix figures |
-| `09_gs_addenda.R` | State occupancy, national cohort sizes, the combined population and the Ecuador and UK cohort figures |
+| `09_descriptive_addenda.R` | State occupancy, national cohort sizes, the combined population and the Ecuador and UK cohort figures |
 | `10_structural_scenarios.R` | Alternative ways of mapping the evidence to model states, and a split of DALYs into disability and early death |
-| `11_coauthor_sensitivity.R` | Alternative mortality evidence, a declining untreated SMR, other UK gaps, other severity mixes, the SMR grid and break-even, and a 10 000-draw check |
+| `11_additional_sensitivity.R` | Alternative mortality evidence, a declining untreated SMR, other UK gaps, other severity mixes, the SMR grid and break-even, and a 10 000-draw check |
 | `lib_cea.R` | Shared code for discounting, disability weights and the integration within cycles |
 | `plot_theme.R` | Figure style (Okabe–Ito colours) and the PNG and PDF export |
 | `run_all.R` | Runs everything in order and records the software versions |
@@ -170,7 +170,7 @@ even number of intervals.
 | Table S9 | `mc_error.tsv` |
 | Table S10 | `structural_scenarios.tsv` |
 | Table S11 | `daly_decomposition.tsv` |
-| Tables S12 and S14 | `sensitivity_coauthor.tsv` |
+| Tables S12 and S14 | `sensitivity_additional.tsv` |
 | Table S13 | `mc_10000.tsv` |
 | Table S15 | `sensitivity_smr_grid.tsv` |
 | Table S16 | `smr_breakeven.tsv` |

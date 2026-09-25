@@ -42,7 +42,7 @@ message(sprintf("[03_run] scenario grid: %d rows x %d PSA iters = %d cohort runs
 
 # ---- Pre-sample parameters per (setting, iter) so paired scenarios share draws
 # (common random numbers -> stable incremental differences for CEA). The sampler
-# lives in lib_cea.R so the co-author sensitivity script draws from the same one.
+# lives in lib_cea.R so the additional sensitivity script draws from the same one.
 samp <- sample_psa_params(CFG$n_psa)
 
 # ---- Run all scenarios x iterations ------------------------------------------

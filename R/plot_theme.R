@@ -97,8 +97,7 @@ number_ticks <- function(n) function(limits) pretty(limits, n)
 # ---- Embed all fonts into a vector PDF, in place.
 # The base 'pdf' device references the standard-14 fonts (Helvetica) by name
 # without embedding them. The journal's artwork guidelines require embedded
-# fonts, and a reviewer's `pdffonts` check on the previous submission set showed
-# `emb: no` on every figure. Ghostscript rewrites the file with subsetted Type 1C
+# fonts, and `pdffonts` shows `emb: no` for the base device. Ghostscript rewrites the file with subsetted Type 1C
 # outlines and leaves the vector geometry editable. cairo_pdf embeds fonts on its
 # own, so this is a no-op path when cairo is available.
 .embed_pdf_fonts <- function(path) {

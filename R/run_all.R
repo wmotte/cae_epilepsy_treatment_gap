@@ -10,8 +10,8 @@ source(file.path(script_dir, "00_config.R"))          # sets CFG (incl. CFG$root
 source(file.path(CFG$root, "R", "plot_theme.R"))    # shared figure house style
 steps <- c("01_prepare_data.R", "02_markov_model.R", "03_run_simulations.R",
            "04_dalys_costs_cea.R", "06_model_checks.R", "05_figures_tables.R", "07_sensitivity.R",
-           "08_markov_diagram.R", "09_gs_addenda.R", "10_structural_scenarios.R",
-           "11_coauthor_sensitivity.R")
+           "08_markov_diagram.R", "09_descriptive_addenda.R", "10_structural_scenarios.R",
+           "11_additional_sensitivity.R")
 for (s in steps) {
   message("\n=========== ", s, " ===========")
   source(file.path(CFG$root, "R", s))

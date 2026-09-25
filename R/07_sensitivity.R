@@ -281,7 +281,7 @@ focal_iter <- function(row, relapse) {
 q025 <- function(x) unname(quantile(x, 0.025, na.rm = TRUE))
 q975 <- function(x) unname(quantile(x, 0.975, na.rm = TRUE))
 
-# Singh C898: the relapse ICER barely moves because numerator and denominator
+# The relapse ICER barely moves because numerator and denominator
 # shrink together; the more informative question is what SHARE of PSA draws stay
 # below each threshold. We add the probability cost-effective at the
 # opportunity-cost, 1x and 3x GDP thresholds (Nigeria) for each relapse level.
