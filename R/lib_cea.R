@@ -5,8 +5,6 @@
 #
 # Shared valuation primitives for the cost-effectiveness accounting.
 #
-# Willem M. (Wim) Otte, w.m.otte@umcutrecht.nl
-#
 # 04_dalys_costs_cea.R (probabilistic accounting), 07_sensitivity.R
 # (deterministic one-way / relapse analyses) and 10_structural_scenarios.R
 # (structural scenario matrix) all value the same cohort trace. Before this file
